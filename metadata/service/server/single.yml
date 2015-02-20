@@ -1,0 +1,34 @@
+applications:
+- murano
+parameters:
+  murano:
+    server:
+      enabled: true
+      version: kilo
+      bind:
+        address: ${_param:single_address}
+        port: 8082
+      database:
+        engine: mysql
+        host: ${_param:single_address}
+        port: 3306
+        name: murano
+        user: murano
+        password: ${_param:mysql_murano_password}
+      identity:
+        engine: keystone
+        host: ${_param:single_address}
+        port: 35357
+        tenant: service
+        user: murano
+        password: ${_param:keystone_murano_password}
+      message_queue:
+        engine: rabbitmq
+        host: ${_param:single_address}
+        port: 5672
+        user: murano
+        password: ${_param:rabbitmq_openstack_password}
+        virtual_host: '/murano'
+        ha_queues: True
+      network:
+        external: ext-net

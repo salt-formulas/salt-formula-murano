@@ -1,0 +1,10 @@
+
+{% set server = salt['grains.filter_by']({
+    'Debian': {
+        'pkgs': ['murano-api','murano-engine','murano-common'],
+        'services': ['murano-api', 'murano-engine'],
+    },
+    'RedHat': {
+        'pkgs': ['openstack-murano'],
+    },
+}, merge=salt['pillar.get']('murano:server')) %}
