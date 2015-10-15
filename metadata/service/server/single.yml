@@ -26,7 +26,7 @@ parameters:
         engine: rabbitmq
         host: ${_param:single_address}
         port: 5672
-        user: murano
+        user: openstack
         password: ${_param:rabbitmq_openstack_password}
         virtual_host: '/murano'
         ha_queues: True

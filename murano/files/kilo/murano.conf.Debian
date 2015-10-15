@@ -174,7 +174,7 @@ log_dir = /var/log/murano
 # Size of RPC thread pool. (integer value)
 #rpc_thread_pool_size = 64
 
-{% if server.notification %}
+{% if server.notification is defined %}
 # Driver or drivers to handle sending notifications. (multi valued)
 #notification_driver =
 notification_driver =messagingv2
