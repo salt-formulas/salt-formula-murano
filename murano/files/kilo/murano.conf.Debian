@@ -963,7 +963,7 @@ password={{ server.message_queue.password }}
 
 # The RabbitMQ virtual host. (string value)
 #virtual_host = /
-virtual_host = rabbit_host={{ server.message_queue.virtual_host }}
+virtual_host = {{ server.message_queue.virtual_host }}
 
 # Boolean flag to enable SSL communication through the RabbitMQ broker
 # between murano-engine and guest agents. (boolean value)
