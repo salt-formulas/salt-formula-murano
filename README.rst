@@ -13,7 +13,7 @@ Single murano services on the controller node
     murano:
       server:
         enabled: true
-        version: icehouse
+        version: liberty
         database:
           engine: mysql
           host: 10.10.20.20
@@ -35,7 +35,14 @@ Single murano services on the controller node
           user: openstack
           password: password
           virtual_host: '/openstack'
-          ha_queues: True
+        murano_agent:
+          message_queue:
+            engine: rabbitmq
+            host: 10.10.20.20
+            port: 5672
+            user: openstack
+            password: password
+            virtual_host: '/murano'
 
 Read more
 =========

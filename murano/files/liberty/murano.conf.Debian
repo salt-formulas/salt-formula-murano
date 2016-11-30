@@ -850,11 +850,11 @@ create_router = True
 #rabbit_host = localhost
 rabbit_host={{ server.message_queue.host }}
 
-# The RabbitMQ broker port where a single node is used. (rabbitinteger
+# The RabbitMQ broker port where a single node is used. (integer
 # value)
 # Deprecated group/name - [DEFAULT]/rabbit_port
 #rabbit_port = 5672
-rabbit_port = {{ server.message_queue.port }}rabbit
+rabbit_port = {{ server.message_queue.port }}
 
 # RabbitMQ HA cluster host:port pairs. (list value)
 # Deprecated group/name - [DEFAULT]/rabbit_hosts
@@ -947,23 +947,23 @@ rabbit_virtual_host={{ server.message_queue.virtual_host }}
 # The RabbitMQ broker address which used for communication with Murano
 # guest agents. (string value)
 #host = localhost
-host={{ server.message_queue.host }}
+host={{ server.murano_agent.message_queue.host }}
 
 # The RabbitMQ broker port. (integer value)
 #port = 5672
-port={{ server.message_queue.port }}
+port={{ server.murano_agent.message_queue.port }}
 
 # The RabbitMQ login. (string value)
 #login = guest
-login={{ server.message_queue.user }}
+login={{ server.murano_agent.message_queue.user }}
 
 # The RabbitMQ password. (string value)
 #password = guest
-password={{ server.message_queue.password }}
+password={{ server.murano_agent.message_queue.password }}
 
 # The RabbitMQ virtual host. (string value)
 #virtual_host = /
-virtual_host = {{ server.message_queue.virtual_host }}
+virtual_host = {{ server.murano_agent.message_queue.virtual_host }}
 
 # Boolean flag to enable SSL communication through the RabbitMQ broker
 # between murano-engine and guest agents. (boolean value)
