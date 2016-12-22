@@ -10,6 +10,8 @@ Sample pillars
 
 Single murano services on the controller node
 
+.. code-block:: yaml
+
     murano:
       server:
         enabled: true
@@ -28,21 +30,26 @@ Single murano services on the controller node
           tenant: service
           user: murano
           password: password
+
         message_queue:
           engine: rabbitmq
-          host: 10.10.20.20
-          port: 5672
+          members:
+          - host: 192.168.1.13
+          - host: 192.168.1.14
+          - host: 192.168.1.15
           user: openstack
-          password: password
+          password: supersecret
           virtual_host: '/openstack'
         murano_agent:
           message_queue:
             engine: rabbitmq
-            host: 10.10.20.20
             port: 5672
+            members:
+            - host: 192.168.1.13
+            - host: 192.168.1.14
+            - host: 192.168.1.15
             user: openstack
-            password: password
-            virtual_host: '/murano'
+            password: supersecretcatalogpassword
 
 Read more
 =========
