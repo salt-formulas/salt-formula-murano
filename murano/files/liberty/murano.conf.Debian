@@ -808,115 +808,17 @@ create_router = True
 # From oslo.messaging
 #
 
-# Use durable queues in AMQP. (boolean value)
-# Deprecated group/name - [DEFAULT]/rabbit_durable_queues
-#amqp_durable_queues = false
-
-# Auto-delete queues in AMQP. (boolean value)
-# Deprecated group/name - [DEFAULT]/amqp_auto_delete
-#amqp_auto_delete = false
-
-# Size of RPC connection pool. (integer value)
-# Deprecated group/name - [DEFAULT]/rpc_conn_pool_size
-#rpc_conn_pool_size = 30
-
-# SSL version to use (valid only if SSL enabled). Valid values are
-# TLSv1 and SSLv23. SSLv2, SSLv3, TLSv1_1, and TLSv1_2 may be
-# available on some distributions. (string value)
-# Deprecated group/name - [DEFAULT]/kombu_ssl_version
-#kombu_ssl_version =
-
-# SSL key file (valid only if SSL enabled). (string value)
-# Deprecated group/name - [DEFAULT]/kombu_ssl_keyfile
-#kombu_ssl_keyfile =
-
-# SSL cert file (valid only if SSL enabled). (string value)
-# Deprecated group/name - [DEFAULT]/kombu_ssl_certfile
-#kombu_ssl_certfile =
-
-# SSL certification authority file (valid only if SSL enabled).
-# (string value)
-# Deprecated group/name - [DEFAULT]/kombu_ssl_ca_certs
-#kombu_ssl_ca_certs =
-
-# How long to wait before reconnecting in response to an AMQP consumer
-# cancel notification. (floating point value)
-# Deprecated group/name - [DEFAULT]/kombu_reconnect_delay
 #kombu_reconnect_delay = 1.0
 
-# The RabbitMQ broker address where a single node is used. (string
-# value)
-# Deprecated group/name - [DEFAULT]/rabbit_host
-#rabbit_host = localhost
+{%- if server.message_queue.members is defined %}
+rabbit_hosts={% for member in server.message_queue.members %}{{ member.host }}:{{ server.message_queue.port }}{% if not loop.last %},{% endif %}{% endfor %}
+{%- else %}
 rabbit_host={{ server.message_queue.host }}
-
-# The RabbitMQ broker port where a single node is used. (integer
-# value)
-# Deprecated group/name - [DEFAULT]/rabbit_port
-#rabbit_port = 5672
-rabbit_port = {{ server.message_queue.port }}
-
-# RabbitMQ HA cluster host:port pairs. (list value)
-# Deprecated group/name - [DEFAULT]/rabbit_hosts
-#rabbit_hosts = $rabbit_host:$rabbit_port
-
-# Connect over SSL for RabbitMQ. (boolean value)
-# Deprecated group/name - [DEFAULT]/rabbit_use_ssl
-#rabbit_use_ssl = false
-
-# The RabbitMQ userid. (string value)
-# Deprecated group/name - [DEFAULT]/rabbit_userid
-#rabbit_userid = guest
-rabbit_userid = {{ server.message_queue.user }}
-
-# The RabbitMQ password. (string value)
-# Deprecated group/name - [DEFAULT]/rabbit_password
-#rabbit_password = guest
-rabbit_password = {{ server.message_queue.password }}
-
-# The RabbitMQ login method. (string value)
-# Deprecated group/name - [DEFAULT]/rabbit_login_method
-#rabbit_login_method = AMQPLAIN
-
-# The RabbitMQ virtual host. (string value)
-# Deprecated group/name - [DEFAULT]/rabbit_virtual_host
-#rabbit_virtual_host = /
+rabbit_port={{ server.message_queue.port }}
+{%- endif %}
+rabbit_userid={{ server.message_queue.user }}
+rabbit_password={{ server.message_queue.password }}
 rabbit_virtual_host={{ server.message_queue.virtual_host }}
-
-# How frequently to retry connecting with RabbitMQ. (integer value)
-#rabbit_retry_interval = 1
-
-# How long to backoff for between retries when connecting to RabbitMQ.
-# (integer value)
-# Deprecated group/name - [DEFAULT]/rabbit_retry_backoff
-#rabbit_retry_backoff = 2
-
-# Maximum number of RabbitMQ connection retries. Default is 0
-# (infinite retry count). (integer value)
-# Deprecated group/name - [DEFAULT]/rabbit_max_retries
-#rabbit_max_retries = 0
-
-# Use HA queues in RabbitMQ (x-ha-policy: all). If you change this
-# option, you must wipe the RabbitMQ database. (boolean value)
-# Deprecated group/name - [DEFAULT]/rabbit_ha_queues
-#rabbit_ha_queues = false
-
-# Number of seconds after which the Rabbit broker is considered down
-# if heartbeat's keep-alive fails (0 disables the heartbeat, >0
-# enables it. Enabling heartbeats requires kombu>=3.0.7 and
-# amqp>=1.4.0). EXPERIMENTAL (integer value)
-# Deprecated group/name - [DEFAULT]/rabbit_heartbeat
-#heartbeat_timeout_threshold = 60
-
-# How often times during the heartbeat_timeout_threshold we check the
-# heartbeat. (integer value)
-#heartbeat_rate = 2
-
-# Deprecated, use rpc_backend=kombu+memory or rpc_backend=fake
-# (boolean value)
-# Deprecated group/name - [DEFAULT]/fake_rabbit
-#fake_rabbit = false
-
 
 [packages_opts]
 
@@ -944,34 +846,15 @@ rabbit_virtual_host={{ server.message_queue.virtual_host }}
 # From murano
 #
 
-# The RabbitMQ broker address which used for communication with Murano
-# guest agents. (string value)
-#host = localhost
+{%- if server.murano_agent.message_queue.members is defined %}
+hosts={% for member in server.murano_agent.message_queue.members %}{{ member.host }}:{{ server.murano_agent.message_queue.port }}{% if not loop.last %},{% endif %}{% endfor %}
+{%- else %}
 host={{ server.murano_agent.message_queue.host }}
-
-# The RabbitMQ broker port. (integer value)
-#port = 5672
 port={{ server.murano_agent.message_queue.port }}
-
-# The RabbitMQ login. (string value)
-#login = guest
+{%- endif %}
 login={{ server.murano_agent.message_queue.user }}
-
-# The RabbitMQ password. (string value)
-#password = guest
 password={{ server.murano_agent.message_queue.password }}
-
-# The RabbitMQ virtual host. (string value)
-#virtual_host = /
 virtual_host = {{ server.murano_agent.message_queue.virtual_host }}
-
-# Boolean flag to enable SSL communication through the RabbitMQ broker
-# between murano-engine and guest agents. (boolean value)
-#ssl = false
-
-# SSL cert file (valid only if SSL enabled). (string value)
-#ca_certs =
-
 
 [ssl]
 
