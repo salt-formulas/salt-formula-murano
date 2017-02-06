@@ -846,15 +846,15 @@ rabbit_virtual_host={{ server.message_queue.virtual_host }}
 # From murano
 #
 
-{%- if server.murano_agent.message_queue.members is defined %}
-hosts={% for member in server.murano_agent.message_queue.members %}{{ member.host }}:{{ server.murano_agent.message_queue.port }}{% if not loop.last %},{% endif %}{% endfor %}
+{%- if server.murano_agent_queue.members is defined %}
+hosts={% for member in server.murano_agent_queue.members %}{{ member.host }}:{{ server.murano_agent_queue.port }}{% if not loop.last %},{% endif %}{% endfor %}
 {%- else %}
-host={{ server.murano_agent.message_queue.host }}
-port={{ server.murano_agent.message_queue.port }}
+host={{ server.murano_agent_queue.host }}
+port={{ server.murano_agent_queue.port }}
 {%- endif %}
-login={{ server.murano_agent.message_queue.user }}
-password={{ server.murano_agent.message_queue.password }}
-virtual_host = {{ server.murano_agent.message_queue.virtual_host }}
+login={{ server.murano_agent_queue.user }}
+password={{ server.murano_agent_queue.password }}
+virtual_host = {{ server.murano_agent_queue.virtual_host }}
 
 [ssl]
 
