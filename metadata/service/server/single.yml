@@ -29,13 +29,12 @@ parameters:
         user: openstack
         password: ${_param:rabbitmq_openstack_password}
         virtual_host: '/murano'
-      murano_agent:
-        message_queue:
-          engine: rabbitmq
-          host: ${_param:single_address}
-          port: 5672
-          user: openstack
-          password: ${_param:rabbitmq_murano_agent_password}
-          virtual_host: '/murano'
+      murano_agent_queue:
+        engine: rabbitmq
+        host: ${_param:single_address}
+        port: 5672
+        user: openstack
+        password: ${_param:rabbitmq_murano_agent_password}
+        virtual_host: '/murano'
       network:
         external: ext-net
