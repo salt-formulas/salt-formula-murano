@@ -1,7 +1,7 @@
 
-======
-Murano
-======
+==============
+Murano formula
+==============
 
 Murano Project introduces an application catalog, which allows application developers and cloud administrators to publish various cloud-ready applications in a browsable‎ categorised catalog, which may be used by the cloud users (including the inexperienced ones) to pick-up the needed applications and services and composes the reliable environments out of them in a "push-the-button" manner.
 
@@ -30,7 +30,6 @@ Single murano services on the controller node
           tenant: service
           user: murano
           password: password
-
         message_queue:
           engine: rabbitmq
           members:
@@ -40,19 +39,18 @@ Single murano services on the controller node
           user: openstack
           password: supersecret
           virtual_host: '/openstack'
-        murano_agent:
-          message_queue:
-            engine: rabbitmq
-            port: 5672
-            members:
-            - host: 192.168.1.13
-            - host: 192.168.1.14
-            - host: 192.168.1.15
-            user: openstack
-            password: supersecretcatalogpassword
+        murano_agent_queue:
+          engine: rabbitmq
+          port: 5672
+          members:
+          - host: 192.168.1.13
+          - host: 192.168.1.14
+          - host: 192.168.1.15
+          user: openstack
+          password: supersecretcatalogpassword
 
-Read more
-=========
+External links
+==============
 
 * https://wiki.openstack.org/wiki/Murano/ProjectOverview
 * http://murano.readthedocs.org/en/latest/install/
