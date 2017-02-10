@@ -427,6 +427,7 @@ auth_uri=http://{{ server.identity.host }}:5000/v2.0/
 # Verify HTTPS connections. (boolean value)
 insecure = {{ server.get('insecure', False) }}
 
+
 # Directory used to cache files related to PKI tokens. (string value)
 #signing_dir = <None>
 signing_dir = /tmp/keystone-signing-muranoapi

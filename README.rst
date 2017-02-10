@@ -16,6 +16,7 @@ Single murano services on the controller node
       server:
         enabled: true
         version: liberty
+        insecure: false
         database:
           engine: mysql
           host: 10.10.20.20
@@ -42,10 +43,7 @@ Single murano services on the controller node
         murano_agent_queue:
           engine: rabbitmq
           port: 5672
-          members:
-          - host: 192.168.1.13
-          - host: 192.168.1.14
-          - host: 192.168.1.15
+          host: 192.168.1.10
           user: openstack
           password: supersecretcatalogpassword
 
