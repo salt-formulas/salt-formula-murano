@@ -12,6 +12,8 @@ murano_packages:
   - require:
     - pkg: murano_packages
 
+{%- if not grains.get('noservices', False) %}
+
 murano_install_database:
   cmd.run:
   - names:
@@ -27,5 +29,7 @@ murano_server_services:
     - cmd: murano_install_database
   - watch:
     - file: /etc/murano/murano.conf
+
+{%- endif %}
 
 {%- endif %}
