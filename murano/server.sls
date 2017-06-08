@@ -12,12 +12,13 @@ murano_packages:
   - require:
     - pkg: murano_packages
 
-{%- if not grains.get('noservices', False) %}
-
 murano_install_database:
   cmd.run:
   - names:
     - murano-db-manage --config-file /etc/murano/murano.conf upgrade
+  {%- if grains.get('noservices') %}
+  - onlyif: /bin/false
+  {%- endif %}
   - require:
     - file: /etc/murano/murano.conf
 
@@ -25,11 +26,12 @@ murano_server_services:
   service.running:
   - enable: true
   - names: {{ server.services }}
+  {%- if grains.get('noservices') %}
+  - onlyif: /bin/false
+  {%- endif %}
   - require:
     - cmd: murano_install_database
   - watch:
     - file: /etc/murano/murano.conf
-
-{%- endif %}
 
 {%- endif %}
