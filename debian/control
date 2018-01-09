@@ -10,6 +10,6 @@ Vcs-Git: https://github.com/tcpcloud/salt-formula-murano.git
 
 Package: salt-formula-murano
 Architecture: all
-Depends: ${misc:Depends}, salt-master, reclass
+Depends: ${misc:Depends}
 Description: Murano Salt formula
  Install and configure Sahara server and client.
