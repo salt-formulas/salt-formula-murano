@@ -1,3 +1,3 @@
 name: "murano"
 version: "0.2"
-source: "https://github.com/tcpcloud/salt-formula-murano"
+source: "https://github.com/salt-formulas/salt-formula-murano"
